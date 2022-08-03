@@ -1,17 +1,27 @@
 defmodule SophosApp.FibonacciServer do
   alias SophosApp.Fibonacci
+
   def loop() do
     receive do
-      {:sequence, n} ->
-        Fibonacci.sequence(n)
+      {:sequence, caller, n} ->
+        result = Fibonacci.sequence(n)
+        IO.inspect(caller)
+        IO.inspect(self())
+        send(caller, {:fibonacci, n, result})
+        loop()
 
-      {:status, msg} ->
-        IO.puts "Running #{inspect(msg)}"
+       {:status, msg} ->
+         IO.puts("Running #{inspect(msg)}")
+         loop()
 
-      message ->
-        IO.inspect(message)
-    after
-      1500 -> IO.puts("Se acabo")
+       {:exit, reason} ->
+         IO.puts("bye for #{inspect(reason)}")
+
+       message ->
+         IO.inspect(message)
+         loop()
+         # after
+        #   1500 -> IO.puts("Se acabó")
     end
   end
 end
