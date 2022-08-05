@@ -3,7 +3,7 @@ defmodule SophosApp.Math do
   Implementación básica del módulo de matemáticas de Sophos
   """
 
-  @api 3.1415
+  @pi 3.1415
 
   @doc """
   Suma dos numeros cualesquiera
@@ -18,4 +18,5 @@ defmodule SophosApp.Math do
   def area(a), do: area(a, a)
   def area(a, b), do: a * b
 
+  def circumference(r), do: 2 * r * @pi
 end
