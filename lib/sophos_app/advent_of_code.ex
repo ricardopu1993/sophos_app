@@ -32,3 +32,19 @@ defmodule SophosApp.AdventOfCode.Day1 do
     transform(t, [-1 | list])
   end
 end
+
+defmodule SophosApp.AdventOfCode.Day2 do
+
+  def exec(cadena) do
+    String.split(cadena, "x")
+    |> Enum.map(&String.to_integer/1)
+    |> areaSuperficial()
+  end
+
+  defp areaSuperficial([l, w, h]) do
+      areas = [l*w, w*h, l*h]
+      min = Enum.min(areas)
+      Enum.sum(areas)*2 + min
+  end
+
+end
