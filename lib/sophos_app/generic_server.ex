@@ -9,9 +9,9 @@ defmodule SophosApp.GenericServer do
   def loop(module, caller) do
     receive do
       msg ->
-        module.handle_message(msg, caller)
+        {:ok, result} = module.handle_message(msg, caller)
+        send(caller, result)
         loop(module, caller)
     end
-
   end
 end
