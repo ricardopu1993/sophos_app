@@ -1,4 +1,4 @@
-defmodule SophosApp.PinPong do
+defmodule SophosApp.PingPong do
   def handle_event({pid_sender, turn}, _caller, state) do
     IO.puts("PID #{inspect(pid_sender)}, turn #{inspect(turn)}")
     :timer.sleep(1000)
